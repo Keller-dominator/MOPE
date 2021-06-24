@@ -3,8 +3,10 @@ import sklearn.linear_model as lm
 from scipy.stats import f, t
 from functools import partial
 from pyDOE2 import *
+import time
 
 
+start1 = time.time()
 def regression(x, b):
     y = sum([x[i] * b[i] for i in range(len(x))])
     return y
@@ -240,3 +242,13 @@ def main(n, m):
 
 if __name__ == '__main__':
     main(15, 3)
+
+
+end1 = time.time()
+    res3 = end1 - start1
+
+    result.append(res1)
+    if res3 >= 3:
+        break
+
+print("Незначущі коефіцієнти регресії pf 3 сек: " + str(len(result)))

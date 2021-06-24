@@ -1,5 +1,8 @@
 from prettytable import PrettyTable
 import numpy as np
+import time
+
+start_time = time.time()
 
 a_values = np.random.randint(1, 20, 4)
 x1_values = np.random.randint(1, 20, 8)
@@ -71,3 +74,5 @@ print(table1)
 print(table2)
 print(table3)
 print(table4)
+
+print("--- %s seconds ---" % (time.time() - start_time))

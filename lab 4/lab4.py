@@ -85,6 +85,12 @@ for i in range(n):
         d -= 1
 for i in range(len(t_list)):
     print('t{} = {}'.format(i, round(t_list[i], 3)))
+k = 0
+for i in t_list:
+    if i > tt:
+        k += 1
+if k == 1:
+    print("\nМОДЕЛЬ НЕАДЕКВАТНА\n")
 print()
 
 # Критерій Фішера
@@ -106,4 +112,4 @@ print('y = {} + {} * x1 + {} * x2 + {} * x3 + {} * x1x2 + {} * x1x3 + {} * x2x3 
               round(b123, 3)))
 print()
 for i in range(len(y_result)):
-    print('y{} = {}'.format(i+1, round(y_result[i], 3)))
+    print('y{} = {}'.format(i + 1, round(y_result[i], 3)))

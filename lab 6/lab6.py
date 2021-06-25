@@ -218,25 +218,34 @@ def fisher_criteria(m, N, d, x_table, y_table, b_coefficients, importance):
     return True if f_p < f_t else False
 
 
+def main(m, N):
+
+    natural_plan = generate_factors_table(natur_plan_raw)
+    y_arr = generate_y(m, natur_plan_raw)
+    while not cochran_criteria(m, N, y_arr):
+        m += 1
+        y_arr = generate_y(m, natural_plan)
+
+    print_matrix(m, N, natural_plan, y_arr, " для натуралізованих факторів:")
+    coefficients = find_coefficients(natural_plan, y_arr)
+    print_equation(coefficients)
+    importance = student_criteria(m, N, y_arr, coefficients)
+    d = len(list(filter(None, importance)))
+    f = fisher_criteria(m, N, d, natural_plan, y_arr, coefficients, importance)
+    return f
+
+
 m = 3
-N = 15
-natural_plan = generate_factors_table(natur_plan_raw)
-y_arr = generate_y(m, natur_plan_raw)
-while not cochran_criteria(m, N, y_arr):
-    m += 1
-    y_arr = generate_y(m, natural_plan)
+n = 15
+count = 100
 
-print_matrix(m, N, natural_plan, y_arr, " для натуралізованих факторів:")
-coefficients = find_coefficients(natural_plan, y_arr)
-print_equation(coefficients)
-importance = student_criteria(m, N, y_arr, coefficients)
-d = len(list(filter(None, importance)))
-fisher_criteria(m, N, d, natural_plan, y_arr, coefficients, importance)
+aNum = 0
 
-count = 10
-    for i in range(count):
-        main(m, n)
+for i in range(count):
+    if main(m, n) is True:
+        aNum +=1
+print("\nКількість адекватних моделей:", aNum)
 
-    print(f"Середній час перевірки за критерієм Кохрена {cochranTime / count}")
-    print(f"Середній час перевірки за критерієм Стьюдента {studentTime / count}")
-    print(f"Середній час перевірки за критерієм Фішера {fisherTime / count}")
+print(f"\nСередній час перевірки за критерієм Кохрена {cochranTime / count}")
+print(f"Середній час перевірки за критерієм Стьюдента {studentTime / count}")
+print(f"Середній час перевірки за критерієм Фішера {fisherTime / count}")

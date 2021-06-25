@@ -3,6 +3,7 @@ import random
 from prettytable import PrettyTable
 import pandas as pd
 import sys
+import time
 
 # 1 пункт
 print("1.Запишемо лінійне рівняння регресії: \n y^ = b0 + b1 * x1 + b2 * x2 + b3 * x3")
@@ -172,6 +173,8 @@ print()
 
 # 5 пункт
 print("5.Проведення статистичних перевірок")
+
+time0 = time.time()
 s_array = []
 for i in range(4):
     s = 0
@@ -235,8 +238,12 @@ for i in koef_t:
     print("+", end=" ")
 print(0)
 print("y1^, y2^, y3^, y4^: ", new_t)
+
+print("Час перевірки: ", time.time()-time0)
+
 print()
 
+time1 = time.time()
 print("Критерій Фішера")
 sad = 0
 for i in range(4):
@@ -249,3 +256,4 @@ print("Ft: ", ft)
 print("Fp: ", fp)
 if fp > ft:
     print("Fp > Fт. \nОтже, рівняння регресії неадекватно оригіналу при рівні значимості 0.05")
+print("Час перевірки: ", time.time()-time1)
